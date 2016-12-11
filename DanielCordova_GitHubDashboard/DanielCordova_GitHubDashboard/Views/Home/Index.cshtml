@@ -2,16 +2,29 @@
 @{
     ViewBag.Title = "GitHub Public Events Dashboard";
 }
+@*<script type="text/javascript">
+    $(document).ready(function () {
+        $("#details").accordion();
+    });
+</script>*@
 
-<div class="jumbotron">
+<div class="jumbotron" style="padding:2% !important">
+   <button onclick="location.href='@Url.Action("Index", "Home")'; return false;">Refresh feed</button>
     @foreach(var gitHubEvent in Model)
     {
         <div style="border:solid 1px black">
             <div>@gitHubEvent.EventActor.DisplayLoginName</div>
             <div>@gitHubEvent.EventType</div>
             <div>@gitHubEvent.EventRepository.RepositoryUrl</div>
-            @*<div>@gitHubEvent.IsPublic</div>
-            <div>@gitHubEvent.CreatedDate</div>*@
-        </div> 
+            @*<a href="#" onclick="toggleDisplay('details');">Show Additional Details</a>*@
+            <button type="button" class="btn" data-toggle="collapse" data-target="#details">Show Additional Details</button>
+            <div id="details" class="collapse">
+                <ul>
+                    <li>@gitHubEvent.EventId</li>
+                    <li>@gitHubEvent.IsPublic</li>
+                    <li>@gitHubEvent.CreatedDate</li>
+                </ul>
+            </div>
+        </div>
     }
 </div>
