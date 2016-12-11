@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace DanielCordova_GitHubDashboard.Controllers
 {
-    public class HomeController : Controller
+    public class DashboardController : Controller
     {
         private const string apiUri = "https://api.github.com/events";
         private const string userAgentHeader = "DanielCordova";
