@@ -7,10 +7,11 @@
     @foreach(var gitHubEvent in Model)
     {
         <div style="border:solid 1px black">
-            <div>@gitHubEvent.EventId</div>
+            <div>@gitHubEvent.EventActor.DisplayLoginName</div>
             <div>@gitHubEvent.EventType</div>
-            <div>@gitHubEvent.IsPublic</div>
-            <div>@gitHubEvent.CreatedDate</div>
+            <div>@gitHubEvent.EventRepository.RepositoryUrl</div>
+            @*<div>@gitHubEvent.IsPublic</div>
+            <div>@gitHubEvent.CreatedDate</div>*@
         </div> 
     }
 </div>

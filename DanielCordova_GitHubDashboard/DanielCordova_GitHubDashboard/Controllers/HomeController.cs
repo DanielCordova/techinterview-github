@@ -19,9 +19,9 @@ namespace DanielCordova_GitHubDashboard.Controllers
         public ActionResult Index()
         {
             List<GitHubEvent> events = new List<GitHubEvent>();
-            client = new WebClient();
-            client.Headers.Add(HttpRequestHeader.UserAgent, userAgentHeader);
-            client.Headers.Add(HttpRequestHeader.Accept, acceptHeader);
+            client = new WebClient();  
+            client.Headers.Add(HttpRequestHeader.UserAgent, userAgentHeader);   //required in request header per GitHub API documentation: https://developer.github.com/v3/
+            client.Headers.Add(HttpRequestHeader.Accept, acceptHeader);     //recommended to include in request header per GitHub API documentation
 
             string response = client.DownloadString(apiUri);
             events = JsonConvert.DeserializeObject<List<GitHubEvent>>(response);
@@ -31,7 +31,7 @@ namespace DanielCordova_GitHubDashboard.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "This web application was designed and developed to be as a user-friendly client to view and explore the feed of public events in the GitHub API";
 
             return View();
         }
