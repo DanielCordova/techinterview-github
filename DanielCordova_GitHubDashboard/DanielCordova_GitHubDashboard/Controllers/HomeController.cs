@@ -26,7 +26,7 @@ namespace DanielCordova_GitHubDashboard.Controllers
             string response = client.DownloadString(apiUri);
             events = JsonConvert.DeserializeObject<List<GitHubEvent>>(response);
 
-            return View();
+            return View(events);
         }
 
         public ActionResult About()
