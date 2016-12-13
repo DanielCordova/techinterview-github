@@ -3,29 +3,78 @@
     ViewBag.Title = "GitHub Public Events Dashboard by Daniel Cordova";
 }
 <style>
-    .dropdown-backdrop {
+    /*.dropdown-backdrop {
         position: static;
+    }*/
+
+    .img-thumbnail {
+        /*max-width:8%;
+        max-height:8%;*/
+        max-height:4vmax;
+        max-width:4vmax;
+        display:block;
+    }
+
+    .jumbotron {
+        font-size: 1.2vw; 
+    }
+
+    .btn{
+        background-size:1.4vw;
+        font-size:1.2vw;
+        padding:0.2vw 0.3vh;
+    }
+
+    .btn-primary{
+        background-color:royalblue;
+        padding:0.2vw 0.3vh;
     }
 </style>
 
-<div class="jumbotron" style="padding:2% !important">
-   <button onclick="location.href='@Url.Action("Index", "Dashboard")'; return false;">Refresh feed</button>
+<div class="jumbotron" style="padding:1% !important;">
+   <button id="refreshBtn" type="button" class="btn btn-info" style="margin-bottom:1%; text-align:center" onclick="location.href='@Url.Action("Index", "Dashboard")'; return false;">Refresh feed</button>
     @{int i = 1;}
-    @foreach(var gitHubEvent in Model)
-    {
-        <div style="border:solid 1px black">
-            <div>@gitHubEvent.EventActor.DisplayLoginName</div>
-            <div>@gitHubEvent.EventType</div>
-            <div>@gitHubEvent.EventRepository.RepositoryUrl</div>
-            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#details@(i)">Show Additional Details</button>
-            <div id="details@(i)" class="collapse">
-                <ul>
-                    <li style="list-style:none">@gitHubEvent.EventId</li>
-                    <li style="list-style:none">@gitHubEvent.IsPublic</li>
-                    <li style="list-style:none">@gitHubEvent.CreatedDate</li>
-                </ul>
+    <div class="container">
+        @foreach (var gitHubEvent in Model)
+        {
+            <div id="githubEvent" class="row" style="border:solid 1px black">
+                <div class="col-xs-7">
+                    <div id="userDiv">
+                        <img class="img-thumbnail" style="display:inline" src="@gitHubEvent.EventActor.AvatarUrl" />
+                        <span id="user">
+                            <b>@gitHubEvent.EventActor.DisplayLoginName</b>
+                        </span>
+                    </div>
+                    <div>
+                        <label>Event Type: </label>
+                        <span>@gitHubEvent.EventType</span>
+                    </div>
+                    <div>
+                        <label>Repository Name: </label>
+                        <span>
+                            <a href="@gitHubEvent.EventRepository.RepositoryUrl" target="_blank">@gitHubEvent.EventRepository.RepositoryName</a>
+                        </span>
+                    </div>
+                    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#details@(i)">Show Additional Details</button>
+                </div>
+                <div class="col-xs-5">
+                    <div id="details@(i)" class="collapse">
+                        <div>
+                            <label>Event Id: </label>
+                            <span>@gitHubEvent.EventId</span>
+                        </div>
+                        <div>
+                            <label>Public: </label>
+                            <span>@gitHubEvent.IsPublic</span>
+                        </div>
+                        <div>
+                            <label>Created at: </label>
+                            <span><time datetime="@gitHubEvent.CreatedDate">@gitHubEvent.CreatedDate</time></span>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        i++;
-    }
+            i++;
+        }
+    </div>  
 </div>

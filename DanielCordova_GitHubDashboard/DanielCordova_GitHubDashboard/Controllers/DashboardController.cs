@@ -1,10 +1,7 @@
 ﻿using DanielCordova_GitHubDashboard.Models;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 
 namespace DanielCordova_GitHubDashboard.Controllers
@@ -38,7 +35,7 @@ namespace DanielCordova_GitHubDashboard.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Contact Information";
 
             return View();
         }
