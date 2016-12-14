@@ -13,6 +13,7 @@ namespace DanielCordova_GitHubDashboard.Models
         private string createdDate;
         private Actor eventActor;
         private Repository eventRepository;
+        private string repoMainPage;
 
         /// <summary>
         /// POCO Properties
@@ -98,6 +99,20 @@ namespace DanielCordova_GitHubDashboard.Models
             set
             {
                 eventRepository = value;
+            }
+        }
+
+        [JsonProperty("html_url")]
+        public string RepoMainPage
+        {
+            get
+            {
+                return repoMainPage;
+            }
+
+            set
+            {
+                repoMainPage = value;
             }
         }
 
