@@ -8,74 +8,84 @@
     }
 
     .img-thumbnail {
-        /*max-width:8%;
-        max-height:8%;*/
-        max-height:4vmax;
-        max-width:4vmax;
-        display:block;
+        height: 6.5vw;
+        width: 6.5vw;
+        display: block;
     }
 
-    .jumbotron {
-        font-size: 1.2vmax; 
+    .btn-primary {
+        background-color: royalblue;
     }
 
-    .btn{
-        background-size:1.4vw;
-        font-size:1.2vmax;
-        padding:0.2vmin 0.3vmin;
+    .row {
+        border:solid 2px black;
+        border-style:groove;
     }
 
-    .btn-primary{
-        background-color:royalblue;
-        padding:0.2vmin 0.3vmin;
+    .btn-info {
+        margin-bottom:1%;
+        text-align:center;
     }
 </style>
 
+<script>
+    function toggle(element) {
+        if (element.value == "Hide Additional Details") {
+            element.value = "Show Additional Details";
+        }
+        else {
+            element.value = "Hide Additional Details";
+        }
+    }
+</script>
+
 <div class="jumbotron" style="padding:1% !important;">
-   <button id="refreshBtn" type="button" class="btn btn-info" style="margin-bottom:1%; text-align:center" onclick="location.href='@Url.Action("Index", "Dashboard")'; return false;">Refresh feed</button>
+    <button id="refreshBtn" type="button" class="btn btn-info" onclick="location.href='@Url.Action("Index", "Dashboard")'; return false;">Refresh feed</button>
     @{int i = 1;}
     <div class="container">
         @foreach (var gitHubEvent in Model)
         {
-            <div id="githubEvent" class="row" style="border:solid 1px black">
-                <div class="col-xs-7">
-                    <div id="userDiv">
-                        <img class="img-thumbnail" style="display:inline" src="@gitHubEvent.EventActor.AvatarUrl" />
-                        <span id="user">
-                            <b>@gitHubEvent.EventActor.DisplayLoginName</b>
-                        </span>
-                    </div>
-                    <div>
-                        <label>Event Type: </label>
-                        <span>@gitHubEvent.EventType</span>
-                    </div>
-                    <div>
-                        <label>Repository Name: </label>
-                        <span>
+            <div id="githubEvent" class="row">
+                <div id="userDiv">
+                    <img class="img-thumbnail" style="display:inline" src="@gitHubEvent.EventActor.AvatarUrl" />
+                    <span id="user">
+                        <b>@gitHubEvent.EventActor.DisplayLoginName</b>
+                    </span>
+                </div>
+                <div>
+                    <label>Event Type: </label>
+                    <span>@gitHubEvent.EventType</span>
+                </div>
+                <div>
+                    <label>Repository Name: </label>
+                    <span>
+                        @if (!gitHubEvent.RepoMainPage.IsEmpty())
+                        {
                             <a href="@gitHubEvent.RepoMainPage" target="_blank">@gitHubEvent.EventRepository.RepositoryName</a>
-                        </span>
-                        @*<span>@gitHubEvent.EventRepository.RepositoryName</span>*@
-                    </div>
-                    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#details@(i)">Show Additional Details</button>
+                        }
+                        else
+                        {
+                            @gitHubEvent.EventRepository.RepositoryName
+                        }
+                    </span>
                 </div>
-                <div class="col-xs-5">
-                    <div id="details@(i)" class="collapse">
-                        <div>
-                            <label>Event Id: </label>
-                            <span>@gitHubEvent.EventId</span>
-                        </div>
-                        <div>
-                            <label>Public: </label>
-                            <span>@gitHubEvent.IsPublic</span>
-                        </div>
-                        <div>
-                            <label>Created at: </label>
-                            <span><time datetime="@gitHubEvent.CreatedDate">@gitHubEvent.CreatedDate</time></span>
-                        </div>
+                <div id="details@(i)" class="collapse">
+                    <div>
+                        <label>Event Id: </label>
+                        <span>@gitHubEvent.EventId</span>
+                    </div>
+                    <div>
+                        <label>Public: </label>
+                        <span>@gitHubEvent.IsPublic</span>
+                    </div>
+                    <div>
+                        <label>Created at: </label>
+                        <span><time datetime="@gitHubEvent.CreatedDate">@(DateTime.Parse(gitHubEvent.CreatedDate))</time></span>
                     </div>
                 </div>
+                <input id="toggleButton@(i)" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#details@(i)" onclick="toggle(this)" value="Show Additional Details"/>
             </div>
             i++;
         }
-    </div>  
+    </div>
 </div>

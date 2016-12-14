@@ -20,23 +20,30 @@ namespace DanielCordova_GitHubDashboard.Controllers
         {
             WebClient client = new WebClient();
             List<GitHubEvent> events = new List<GitHubEvent>();
-            client.Headers.Add(HttpRequestHeader.Authorization, credentials);
+            client.Headers[HttpRequestHeader.Authorization] = string.Format("Basic {0}", credentials);  //required GitHub user authentication to increase API request limit
             client.Headers.Add(HttpRequestHeader.UserAgent, userName);   //required in request header per GitHub API documentation: https://developer.github.com/v3/
             client.Headers.Add(HttpRequestHeader.Accept, acceptHeader);     //recommended to include in request header per GitHub API documentation
 
             string response = client.DownloadString(apiUri);
             events = JsonConvert.DeserializeObject<List<GitHubEvent>>(response);
 
-            //for (int i = 0; i < events.Count; i++)
-            //{
-            //    client.Credentials = new NetworkCredential(userName, password);
-            //    client.Headers.Add(HttpRequestHeader.UserAgent, userName);
-            //    client.Headers.Add(HttpRequestHeader.Accept, acceptHeader);
+            for (int i = 0; i < events.Count; i++)
+            {
+                client.Headers[HttpRequestHeader.Authorization] = string.Format("Basic {0}", credentials);
+                client.Headers.Add(HttpRequestHeader.UserAgent, userName);
+                client.Headers.Add(HttpRequestHeader.Accept, acceptHeader);
 
-            //    string repoUri = events[i].EventRepository.RepositoryUrl;
-            //    string repoResponse = client.DownloadString(repoUri);
-            //    events[i].RepoMainPage = JsonConvert.DeserializeObject<GitHubEvent>(repoResponse).RepoMainPage;
-            //}
+                string repoUri = events[i].EventRepository.RepositoryUrl;
+                try
+                {
+                    string repoResponse = client.DownloadString(repoUri);
+                    events[i].RepoMainPage = JsonConvert.DeserializeObject<GitHubEvent>(repoResponse).RepoMainPage;
+                }
+                catch(WebException e)
+                {
+                    continue;
+                }
+            }
 
             return View(events);
         }
