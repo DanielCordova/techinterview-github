@@ -1,5 +1,18 @@
-# Technical Interview Homework: GitHub Dashboard
+# Instructions for testing submission
+1. Go to http://104.197.12.155/
+	a. This is a Google Cloud hosted server that has my latest project code deployed
+	b. I used this cloud instance to test my submission on multiple device types that were not able to run the project locally
+	
+2. For reviewing the code and running on your local machine:
+	a. Run a Git clone command against my repository into a local directory on your machine
+	b. Open Microsoft Visual Studio client (For most accurate results, I would recommend using Microsoft Visual Studio 2015)
+	c. Select <b>File</b> --> <b>Open</b> --> <b>Project/Solution...</b>
+	d. Browse to the location on your local machine in which you cloned my repository
+	e. Select the Visual Studio solution and open
+	f. Press the 'F5' key and the project will run locally
 
+
+# Technical Interview Homework: GitHub Dashboard
 
 ##Purpose
 The purpose of this exercise is to assess the candidate’s ability to build cross platform software clients that satisfy stated requirements. The completed assignment should not only satisfy the requirements outlined below, but also give the candidate an opportunity to show-off their skills.
