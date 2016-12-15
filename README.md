@@ -1,16 +1,22 @@
 # Instructions for testing submission
-1. Go to http://104.197.12.155/
-	a. This is a Google Cloud hosted server that has my latest project code deployed
-	b. I used this cloud instance to test my submission on multiple device types that were not able to run the project locally
-	
-2. For reviewing the code and running on your local machine:
-	a. Run a Git clone command against my repository into a local directory on your machine
-	b. Open Microsoft Visual Studio client (For most accurate results, I would recommend using Microsoft Visual Studio 2015)
-	c. Select <b>File</b> --> <b>Open</b> --> <b>Project/Solution...</b>
-	d. Browse to the location on your local machine in which you cloned my repository
-	e. Select the Visual Studio solution and open
-	f. Press the 'F5' key and the project will run locally
-
+<ol>
+  <li>Go to http://104.197.12.155/
+    <ul>
+      <li>This is a Google Cloud hosted server that has my latest project code deployed</li>
+      <li>I used this cloud instance to test my submission on multiple device types that were not able to run the project locally</li>
+    </ul>
+  </li>
+  <li> For reviewing the code and running on your local machine:
+     <ul>
+      <li>Run the Git clone command against my repository into a local directory on your machine</li>
+      <li>Open Microsoft Visual Studio client (For most accurate results, I would recommend using Microsoft Visual Studio 2015)</li>
+      <li>Select <b>File</b> --> <b>Open</b> --> <b>Project/Solution...</b></li>
+      <li>Browse to the location on your local machine in which you cloned my repository</li>
+      <li>Select the Visual Studio solution and open</li>
+      <li>Press the 'F5' key and the project will run locally</li>
+    </ul>
+  </li>
+</ol>
 
 # Technical Interview Homework: GitHub Dashboard
 
